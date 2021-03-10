@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 128,
     alignItems: "flex-start",
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2),
+    paddingBottom: theme.spacing(5),
     backgroundColor: colors.orange,
   },
   title: {
@@ -45,7 +45,7 @@ export default function ProminentAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant='h5' noWrap>
-            Book Search
+            Goodle Books Search
           </Typography>
 
           <IconButton
