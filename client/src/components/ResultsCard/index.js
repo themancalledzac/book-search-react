@@ -1,10 +1,11 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import colors from "../../components/color";
+import Books from "../Books";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {
-    marginTop: theme.spacing(15),
+    marginTop: theme.spacing(5),
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
   },
@@ -16,10 +17,11 @@ const ResultsCard = () => {
     <Container
       className={classes.searchBar}
       maxWidth='md'
-      style={{ backgroundColor: colors.primary }}
+      style={{ backgroundColor: colors.yellow }}
     >
       <Typography component='div'>
-        <p>Results</p>
+        <h5>Saved Books</h5>
+        <Books />
       </Typography>
     </Container>
   );
