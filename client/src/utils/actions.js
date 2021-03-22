@@ -3,6 +3,18 @@
 export const BOOK_SEARCH = () => {
   return {
     type: "BOOK_SEARCH",
+    payload: "",
+  };
+};
+export const BOOK_SEARCH_INPUT = () => {
+  return {
+    type: "BOOK_SEARCH_INPUT",
+    payload: "",
+  };
+};
+export const Loading = () => {
+  return {
+    type: "Loading",
   };
 };
 export const BOOK_ADD = () => {
