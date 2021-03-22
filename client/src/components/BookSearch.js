@@ -1,7 +1,9 @@
 import { Button, Container, makeStyles, TextField } from "@material-ui/core";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import colors from "./color";
 import API from "../utils/API";
+import { useDispatch, useSelector } from "react-redux";
+import { BOOK_SEARCH, LOADING } from "../utils/actions";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {
@@ -14,24 +16,42 @@ const useStyles = makeStyles((theme) => ({
 // ---------------------------------state/functions----------------------------//
 
 const BookSearch = () => {
-  const [search, setSearch] = useState("");
   const classes = useStyles();
-  const refContainer = useRef();
+  const searchRef = useRef();
 
-  function handleInputChange(e) {
+  const BookSearchResults = useSelector((state) => state.BookSearchResults);
+  const BookSearchInput = useSelector((state) => state.BookSearchInput);
+  const dispatch = useDispatch();
+
+  // starting data for the website, 'sample books', if you will
+  useEffect(() => {
+    async function initialBooks() {
+      const { data } = await API.searchBooks("F Scott Fitzgerald");
+      console.log(data);
+      // dispatch({ type: "BOOK_SEARCH", books: data });
+    }
+    initialBooks();
+  }, []);
+
+  const handleInputChange = async (e) => {
     e.preventDefault();
-    const value = e.target.value;
-    setSearch(value);
-    console.log(search);
-  }
+    dispatch({
+      type: "BOOK_SEARCH_INPUT",
+      input: searchRef.current.value,
+    });
+  };
 
   const handleSubmit = (e) => {
-    // why is this preventDefault not preventing default?
     e.preventDefault();
-
-    // console.log(refContainer.current);
-    // console.log(search);
-    API.getBooks().then(({ data }) => {
+    // api call
+    API.searchBooks(BookSearchInput).then(({ data }) => {
+      dispatch({
+        type: "LOADING",
+      });
+      dispatch({
+        type: "BOOK_SEARCH",
+        books: data.items,
+      });
       console.log(data);
     });
   };
@@ -53,7 +73,7 @@ const BookSearch = () => {
         <TextField
           id='bookSearchId'
           name='bookSearch'
-          useRef={refContainer}
+          useRef={searchRef}
           label='Book Search'
           style={{ margin: 8 }}
           fullWidth
