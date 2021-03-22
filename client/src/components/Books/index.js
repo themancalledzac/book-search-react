@@ -22,7 +22,7 @@ const Books = () => {
         </div>
       </div>
       <div className='bottom' style={{ display: "flex" }}>
-        <image
+        <img
           style={{
             flex: "1 1 0",
             border: "1px solid #ddd",
@@ -32,8 +32,9 @@ const Books = () => {
             margin: "10px",
             position: "relative",
             float: "left",
+            alt: "alt image",
           }}
-        ></image>
+        />
         <p style={{ flex: "4 1 0", margin: "10px" }}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. At, aliquid?
           Eaque possimus unde ea rerum iste dolores molestiae ipsam qui omnis.

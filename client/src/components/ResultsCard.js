@@ -1,7 +1,7 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
-import colors from "../../components/color";
-import Books from "../Books";
+import colors from "./color";
+import Books from "./Books";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {

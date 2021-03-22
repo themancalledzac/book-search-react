@@ -1,15 +1,12 @@
 const express = require("express");
-const PORT = process.env.PORT || 3001;
 const app = express();
 const routes = require("./routes");
 const mongoose = require("mongoose");
 
+const PORT = process.env.PORT || 3001;
 // defines the middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// add routes, both API and view
-app.use(routes);
 
 // ??
 // require("./config/connect");
@@ -19,8 +16,14 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// add routes, both API and view
+app.use(routes);
+
 // connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/booksearch");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/booksearch", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 app.listen(PORT, function () {
   console.log(`🌎 ==> API server now on port ${PORT}!`);

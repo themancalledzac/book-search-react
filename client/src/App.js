@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import "./App.css";
-import Nav from "./components/Nav";
-import Search from "./pages/Search";
-import Saved from "./pages/Saved";
+import Nav from "./components/Nav.js";
+import Search from "./pages/Search.js";
+import Saved from "./pages/Saved.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
