@@ -2,10 +2,9 @@ const BookSearchReducer = (state, action) => {
   switch (action.type) {
     case "BOOK_SEARCH":
       return {
-        state,
-        // ...state,
-        // books: [...action.books],
-        // loading: false,
+        ...state,
+        books: [...action.books],
+        loading: false,
       };
     default:
       return state;
