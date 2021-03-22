@@ -1,33 +1,50 @@
-const db = require("../models");
+const { Books } = require("../models");
 
 // defining methods for the booksController
-
 module.exports = {
-  findAll: (req, res) => {
-    db.Book.find(req.query)
-      .sort({ date: -1 })
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  findAll: async (req, res) => {
+    try {
+      const books = await Books.find({}).sort({ date: -1 });
+      res.status(200).json(books);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  findById: (req, res) => {
-    db.Book.findById(req.params.id)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  create: async (req, res) => {
+    try {
+      const bookCreate = await Books.create(req.body);
+      res.status(200).json(bookCreate);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
-  create: (req, res) => {
-    db.Book.create(req.body)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
-  },
-  update: function (req, res) {
-    db.Book.findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
-  },
-  remove: (req, res) => {
-    db.Book.findById({ _id: req.params.id })
-      .then((dbModel) => dbModel.remove())
-      .then((dbModel) => res.json(dbModel))
-      .catch((err) => res.status(422).json(err));
+  remove: async (req, res) => {
+    try {
+      const bookDelete = await Books.findByIdAndRemove(req.paramms.id);
+      res.status(200).json(bookDelete);
+    } catch (err) {
+      res.status(422).json(err);
+    }
   },
 };
+
+// ------------------------------------------------------------------//
+//                                                                   //
+//                 old ways from in class assignments                //
+//                                                                   //
+// ------------------------------------------------------------------//
+// db.Book.find(req.query)
+//   .sort({ date: -1 })
+//   .then((dbModel) => res.json(dbModel))
+//   .catch((err) => res.status(422).json(err));
+// create
+
+// db.Book.create(req.body)
+// .then((dbModel) => res.json(dbModel))
+// .catch((err) => res.status(422).json(err));
+// delete
+
+// db.Book.findById({ _id: req.params.id })
+//   .then((dbModel) => dbModel.remove())
+//   .then((dbModel) => res.json(dbModel))
+//   .catch((err) => res.status(422).json(err));
