@@ -13,6 +13,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Search} />
             <Route exact path='/saved' component={Saved} />
+            {/* here lies the 'this route doesn't exist/not fount */}
+            <Route exact path='*' component={Search} />
           </Switch>
         </Router>
       </div>

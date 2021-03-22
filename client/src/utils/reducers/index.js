@@ -1,12 +1,16 @@
 // import all our reducers
 import { combineReducers } from "redux";
-// import BookSearchReducer from "./BookSearchReducer";
+import BookSearchResults from "./BookSearchResults.js";
+import BookSearchInput from "./BookSearchInput.js";
+import Loading from "./Loading.js";
 
 // import changeWidth from "./changeWidth";
 
 const allReducer = combineReducers({
   // name our reducers here
-  // BookSearchReducer,
+  BookSearchResults,
+  BookSearchInput,
+  Loading,
 });
 
 export default allReducer;
