@@ -16,13 +16,13 @@ import { useSelector } from "react-redux";
 const Search = () => {
   // const classes = useStyles();
 
-  // const bookSearch = useSelector((state) => state.BookSearchResults);
+  const bookSearch = useSelector((state) => state.BookSearchResults);
 
   return (
     <>
       <Container>
         <BookSearch />
-        {/* <ResultsCard list={bookSearch.books} /> */}
+        <ResultsCard list={bookSearch.books} />
       </Container>
     </>
   );

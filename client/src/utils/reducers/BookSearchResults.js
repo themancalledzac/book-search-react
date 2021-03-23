@@ -1,4 +1,4 @@
-const BookSearchResults = (state = "Fitzgerald", action) => {
+const BookSearchResults = (state = "", action) => {
   switch (action.type) {
     case "BOOK_SEARCH":
       return {
