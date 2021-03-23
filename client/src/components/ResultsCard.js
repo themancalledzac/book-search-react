@@ -1,4 +1,10 @@
-import { Button, Container, makeStyles, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
 import colors from "./color";
 import Books from "./Books";
@@ -20,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     float: "left",
     alt: "alt image",
   },
+  bookCard: {
+    marginBottom: "25px",
+  },
 }));
 
 const ResultsCard = ({ list }) => {
@@ -30,42 +39,33 @@ const ResultsCard = ({ list }) => {
       maxWidth='md'
       style={{ backgroundColor: colors.yellow }}
     >
-      {list.length ? (
+      {list ? (
         list.map((item, index) => {
           return (
-            <div
-              className='BookCard'
-              style={{ border: "1px solid #ddd", padding: "20px" }}
-              key={index}
-            >
-              <div className='top' style={{ display: "flex" }}>
-                <div className='BookTitle' style={{ flex: "1 1 0" }}>
-                  <h5>{item.title}</h5>
-                  <h6>{item.authors}</h6>
-                </div>
-                <div className='viewDelete' style={{ flex: "1 1 0" }}>
-                  <Button varient='contained' color='default' href='#'>
-                    View
-                  </Button>
-                  <Button varient='contained' color='default' href='#'>
-                    Delete
-                  </Button>
-                </div>
-              </div>
-              <div className='bottom' style={{ display: "flex" }}>
-                <img className={classes.image} alt='Book Image'>
-                  {}
-                </img>
-                <p style={{ flex: "4 1 0", margin: "10px" }}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
-                  aliquid? Eaque possimus unde ea rerum iste dolores molestiae
-                  ipsam qui omnis. Odit non fugit ut harum! Animi, assumenda,
-                  non placeat officia tempore alias laudantium harum, doloremque
-                  facere id optio totam perferendis qui facilis quae quo
-                  consequuntur iure praesentium? Corrupti, quibusdam!
-                </p>
-              </div>
-            </div>
+            <>
+              <Grid className={classes.bookCard} container spacing={3}>
+                <Grid item xs={12} sm={4}>
+                  <Grid item xs={12} sm={12}>
+                    <h1 href={item.link}>{item.title}</h1>
+                    <h1>{item.authors}</h1>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <img src={item.image} alt='Book Cover' href={item.link} />
+                  </Grid>
+                </Grid>
+                <Grid item xs={12} sm={8}>
+                  <Grid item xs={12} sm={12}>
+                    <p>{item.description}</p>
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <Button onClick={item.link}>View</Button>
+                    <Button onClick={item.link}>Add to Cart</Button>
+                  </Grid>
+                  <Grid item xs={12} sm={3}></Grid>
+                </Grid>
+              </Grid>
+              <br></br>
+            </>
           );
         })
       ) : (
