@@ -26,12 +26,29 @@ const BookSearch = () => {
   // starting data for the website, 'sample books', if you will
   useEffect(() => {
     async function initialBooks() {
-      const { data } = await API.searchBooks("F Scott Fitzgerald");
-      console.log(data);
-      // dispatch({ type: "BOOK_SEARCH", books: data });
+      const { data } = await API.searchBooks("The New York Times Bestsellers");
+      console.log(data.items);
+
+      dispatch({
+        type: "BOOK_SEARCH",
+        books: await data.items.map((item) => bookData(item)),
+      });
     }
     initialBooks();
   }, []);
+
+  const bookData = (item) => {
+    return {
+      authors: item.volumeInfo.authors,
+      image: item.volumeInfo.imageLinks
+        ? item.volumeInfo.imageLinks.thumbnail
+        : "./images/book.png",
+      title: item.volumeInfo.title,
+      subtitle: item.volumeInfo.subtitle,
+      description: item.volumeInfo.description,
+      link: item.volumeInfo.infoLink,
+    };
+  };
 
   const handleInputChange = async (e) => {
     e.preventDefault();
@@ -73,7 +90,7 @@ const BookSearch = () => {
         <TextField
           id='bookSearchId'
           name='bookSearch'
-          useRef={searchRef}
+          inputRef={searchRef}
           label='Book Search'
           style={{ margin: 8 }}
           fullWidth
