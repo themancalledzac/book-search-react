@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ResultsCard = ({ list }) => {
   const classes = useStyles();
+
   return (
     <Container
       className={classes.searchBar}
@@ -43,14 +44,23 @@ const ResultsCard = ({ list }) => {
         list.map((item, index) => {
           return (
             <>
-              <Grid className={classes.bookCard} container spacing={3}>
+              <Grid
+                key={index}
+                className={classes.bookCard}
+                container
+                spacing={3}
+              >
                 <Grid item xs={12} sm={4}>
                   <Grid item xs={12} sm={12}>
                     <h1 href={item.link}>{item.title}</h1>
                     <h1>{item.authors}</h1>
                   </Grid>
                   <Grid item xs={12} sm={4}>
-                    <img src={item.image} alt='Book Cover' href={item.link} />
+                    <img
+                      src={item.image}
+                      alt='Book Cover'
+                      onClick={() => window.open(`${item.link}`, "_blank")}
+                    />
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={8}>
@@ -58,8 +68,12 @@ const ResultsCard = ({ list }) => {
                     <p>{item.description}</p>
                   </Grid>
                   <Grid item xs={12} sm={3}>
-                    <Button onClick={item.link}>View</Button>
-                    <Button onClick={item.link}>Add to Cart</Button>
+                    <Button
+                      onClick={() => window.open(`${item.link}`, "_blank")}
+                    >
+                      View
+                    </Button>
+                    <Button link={item.link}>Add to Cart</Button>
                   </Grid>
                   <Grid item xs={12} sm={3}></Grid>
                 </Grid>

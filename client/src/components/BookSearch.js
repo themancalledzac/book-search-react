@@ -28,7 +28,9 @@ const BookSearch = () => {
     async function initialBooks() {
       const { data } = await API.searchBooks("The New York Times Bestsellers");
       console.log(data.items);
-
+      dispatch({
+        type: "LOADING",
+      });
       dispatch({
         type: "BOOK_SEARCH",
         books: await data.items.map((item) => bookData(item)),
@@ -46,7 +48,8 @@ const BookSearch = () => {
       title: item.volumeInfo.title,
       subtitle: item.volumeInfo.subtitle,
       description: item.volumeInfo.description,
-      link: item.volumeInfo.infoLink,
+      link: item.saleInfo.buyLink,
+      index: item.id,
     };
   };
 
@@ -56,21 +59,21 @@ const BookSearch = () => {
       type: "BOOK_SEARCH_INPUT",
       input: searchRef.current.value,
     });
+    console.log(BookSearchInput);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // api call
-    API.searchBooks(BookSearchInput).then(({ data }) => {
-      dispatch({
-        type: "LOADING",
-      });
-      dispatch({
-        type: "BOOK_SEARCH",
-        books: data.items,
-      });
-      console.log(data);
+    const { data } = await API.searchBooks(searchRef.current.value);
+    dispatch({
+      type: "LOADING",
     });
+    dispatch({
+      type: "BOOK_SEARCH",
+      books: await data.items.map((item) => bookData(item)),
+    });
+    console.log(data);
   };
 
   // ----------------------------------component -----------------------------//
