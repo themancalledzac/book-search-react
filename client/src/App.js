@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Nav from "./components/Nav.js";
+import NavNew from "./components/NavNew.js";
 import Search from "./pages/Search.js";
 import Saved from "./pages/Saved.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

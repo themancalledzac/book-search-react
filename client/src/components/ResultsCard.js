@@ -38,7 +38,7 @@ const ResultsCard = ({ list }) => {
     <Container
       className={classes.searchBar}
       maxWidth='md'
-      style={{ backgroundColor: colors.yellow }}
+      style={{ backgroundColor: colors.blueLight }}
     >
       {list ? (
         list.map((item, index) => {

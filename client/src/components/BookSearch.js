@@ -82,7 +82,7 @@ const BookSearch = () => {
     <Container
       className={classes.searchBar}
       maxWidth='md'
-      style={{ backgroundColor: colors.primary }}
+      style={{ backgroundColor: colors.blueLight, borderRadius: "7px" }}
     >
       <form
         component='div'
