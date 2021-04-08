@@ -204,8 +204,14 @@ export default function ProminentAppBar() {
     console.log(BookSearchInput);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const keyPress = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit();
+      // put the login here
+    }
+  };
+
+  const handleSubmit = async () => {
     // api call
     const { data } = await API.searchBooks(searchRef.current.value);
     dispatch({
@@ -283,6 +289,7 @@ export default function ProminentAppBar() {
               label='bookSearch'
               type='text'
               onChange={handleInputChange}
+              onKeyDown={keyPress}
               onSubmit={handleSubmit}
             />
           </div>
