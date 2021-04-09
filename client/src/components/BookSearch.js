@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(15),
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
+    backgroundColor: colors.blueLight,
   },
 }));
 
@@ -82,7 +83,7 @@ const BookSearch = () => {
     <Container
       className={classes.searchBar}
       maxWidth='md'
-      style={{ backgroundColor: colors.blueLight, borderRadius: "7px" }}
+      style={{ borderRadius: "7px" }}
     >
       <form
         component='div'

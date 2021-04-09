@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import BookSearch from "../components/BookSearch.js";
 import ResultsCard from "../components/ResultsCard.js";
 import { useSelector } from "react-redux";
+import AboutCard from "../components/AboutCard.js";
 
 // const useStyles = makeStyles((theme) => ({
 //   searchBar: {
@@ -21,7 +22,7 @@ const Search = () => {
   return (
     <>
       <Container>
-        <BookSearch />
+        <AboutCard />
         <ResultsCard list={bookSearch.books} />
       </Container>
     </>

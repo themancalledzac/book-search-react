@@ -1,13 +1,9 @@
-const BookSearchInput = (state = "", action) => {
+const BookSearchInput = (searchInput = "", action) => {
   switch (action.type) {
     case "BOOK_SEARCH_INPUT":
-      return {
-        ...state,
-        searchInput: action.input,
-        loading: false,
-      };
+      return (searchInput = action.input);
     default:
-      return state;
+      return searchInput;
   }
 };
 
