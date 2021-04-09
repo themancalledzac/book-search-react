@@ -14,7 +14,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import Button from "@material-ui/core/Button";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import ListIcon from "@material-ui/icons/List";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Grid, TextField } from "@material-ui/core";
 import API from "../utils/API";
@@ -98,24 +98,6 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
-  cartLarge: {
-    marginRight: "3rem",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-    [theme.breakpoints.down("xs")]: {
-      display: "none",
-    },
-  },
-  cartSmall: {
-    marginRight: "3rem",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-    [theme.breakpoints.down("xs")]: {
-      display: "block",
-    },
-  },
 }));
 
 export default function ProminentAppBar() {
@@ -191,18 +173,18 @@ export default function ProminentAppBar() {
       title: item.volumeInfo.title,
       subtitle: item.volumeInfo.subtitle,
       description: item.volumeInfo.description,
-      link: item.saleInfo.buyLink,
+      link: item.volumeInfo.infoLink,
       index: item.id,
     };
   };
-  const handleInputChange = async (e) => {
-    e.preventDefault();
-    dispatch({
-      type: "BOOK_SEARCH_INPUT",
-      input: searchRef.current.value,
-    });
-    console.log(BookSearchInput);
-  };
+  // const handleInputChange = async (e) => {
+  //   e.preventDefault();
+  //   dispatch({
+  //     type: "BOOK_SEARCH_INPUT",
+  //     input: searchRef.current.value,
+  //   });
+  //   console.log(BookSearchInput);
+  // };
 
   const keyPress = (e) => {
     if (e.keyCode === 13) {
@@ -221,6 +203,11 @@ export default function ProminentAppBar() {
       type: "BOOK_SEARCH",
       books: await data.items.map((item) => bookData(item)),
     });
+    dispatch({
+      type: "BOOK_SEARCH_INPUT",
+      input: searchRef.current.value,
+    });
+    document.getElementById("bookSearchId").value = "";
     console.log(data);
   };
 
@@ -237,15 +224,16 @@ export default function ProminentAppBar() {
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      style={{ paddingRight: "20px" }}
     >
       <MenuItem>
-        <IconButton aria-label='show 4 new mails' color='inherit'>
-          <MailIcon />
+        <IconButton color='inherit' className={classes.menuItem}>
+          <ListIcon />
         </IconButton>
-        <p>Contact Me</p>
+        <p>Wishlist</p>
       </MenuItem>
 
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleProfileMenuOpen} className={classes.menuItem}>
         <IconButton
           aria-label='account of current user'
           aria-controls='primary-search-account-menu'
@@ -262,7 +250,7 @@ export default function ProminentAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position='static'>
+      <AppBar style={{ backgroundColor: colors.blue }} position='static'>
         <Toolbar>
           <Typography
             className={classes.title}
@@ -288,7 +276,7 @@ export default function ProminentAppBar() {
               inputRef={searchRef}
               label='bookSearch'
               type='text'
-              onChange={handleInputChange}
+              // onChange={handleInputChange}
               onKeyDown={keyPress}
               onSubmit={handleSubmit}
             />
@@ -299,7 +287,7 @@ export default function ProminentAppBar() {
               aria-label='module to contact / email me'
               color='inherit'
             >
-              <MailIcon />
+              <ListIcon />
             </IconButton>
             <IconButton
               aria-label='link to portfolio'
@@ -326,86 +314,3 @@ export default function ProminentAppBar() {
     </div>
   );
 }
-
-// <Grid container spacing={3}>
-//   <Grid item xs={12} sm={3}>
-//     <Grid container spacing={3}>
-//       <Grid item xs={8}>
-//         <Typography
-//           style={{ textAlign: "center" }}
-//           className={classes.title}
-//           variant='h5'
-//           noWrap
-//           onClick={refreshPage}
-//         >
-//           Books Search
-//         </Typography>
-//       </Grid>
-//       <Grid item xs={4}>
-//         <IconButton
-//           className={classes.cartSmall_}
-//           aria-label='display more actions'
-//           color='inherit'
-//         >
-//           <Button
-//             variant='contained'
-//             color='default'
-//             href='#contained-buttons'
-//           >
-//             Shopping Cart
-//           </Button>
-//         </IconButton>
-//       </Grid>
-//     </Grid>
-//   </Grid>
-//   <Grid item xs={12} sm={6}>
-//     <Grid container spacing={2}>
-//       <Grid item xs={12} sm={9}>
-//         <TextField
-//           id='bookSearchId'
-//           name='bookSearch'
-//           inputRef={searchRef}
-//           label='Book Search'
-//           style={{ margin: 8 }}
-//           fullWidth
-//           margin='normal'
-//           type='text'
-//           InputLabelProps={{
-//             shrink: true,
-//           }}
-//           variant='filled'
-//           onChange={handleInputChange}
-//         />
-//       </Grid>
-//       <Grid item xs={12} sm={3}>
-//         <Button
-//           variant='contained'
-//           // onSubmit={handleSubmit}
-//           type='submit'
-//           onClick={handleSubmit}
-//           style={{
-//             float: "right",
-//             margin: "5px 0",
-//           }}
-//         >
-//           Search
-//         </Button>
-//       </Grid>
-//     </Grid>
-//   </Grid>
-//   <Grid item xs={12} sm={3}>
-//     <IconButton
-//       className={classes.cartLarge}
-//       aria-label='display more actions'
-//       color='inherit'
-//     >
-//       <Button
-//         variant='contained'
-//         color='default'
-//         href='#contained-buttons'
-//       >
-//         Shopping Cart
-//       </Button>
-//     </IconButton>
-//   </Grid>
-// </Grid>
