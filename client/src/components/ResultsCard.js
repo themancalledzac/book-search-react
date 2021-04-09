@@ -8,6 +8,7 @@ import {
 import React from "react";
 import colors from "./color";
 import Books from "./Books";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {
@@ -25,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     float: "left",
     alt: "alt image",
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
   bookCard: {
     marginBottom: "25px",
@@ -33,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
 
 const ResultsCard = ({ list }) => {
   const classes = useStyles();
+  const BookSearchInput = useSelector(
+    (searchInput) => searchInput.BookSearchInput
+  );
+  const headerTitle = useSelector((title) => title.headerTitle);
 
   return (
     <Container
@@ -40,6 +48,10 @@ const ResultsCard = ({ list }) => {
       maxWidth='md'
       style={{ backgroundColor: colors.blueLight }}
     >
+      <Typography className={classes.title} variant='h6' noWrap>
+        {BookSearchInput ? `Search Result:` : `New York Times Bestsellers`}{" "}
+        {BookSearchInput}
+      </Typography>
       {list ? (
         list.map((item, index) => {
           return (
@@ -73,7 +85,7 @@ const ResultsCard = ({ list }) => {
                     >
                       View
                     </Button>
-                    <Button link={item.link}>Add to Cart</Button>
+                    <Button link={item.link}>Add to Wishlist</Button>
                   </Grid>
                   <Grid item xs={12} sm={3}></Grid>
                 </Grid>
