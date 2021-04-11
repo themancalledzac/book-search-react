@@ -7,8 +7,9 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import colors from "./color";
-import Books from "./Books";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import API from "../utils/API";
+import SaveButton from "./SaveButton";
 
 const useStyles = makeStyles((theme) => ({
   searchBar: {
@@ -32,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
   },
   bookCard: {
     marginBottom: "25px",
+    borderRadius: "7px",
+  },
+  underLine: {
+    borderTop: "1px #000000",
   },
 }));
 
@@ -40,7 +45,7 @@ const ResultsCard = ({ list }) => {
   const BookSearchInput = useSelector(
     (searchInput) => searchInput.BookSearchInput
   );
-  const headerTitle = useSelector((title) => title.headerTitle);
+  const dispatch = useDispatch();
 
   return (
     <Container
@@ -55,7 +60,7 @@ const ResultsCard = ({ list }) => {
       {list ? (
         list.map((item, index) => {
           return (
-            <>
+            <Container key={index}>
               <Grid
                 key={index}
                 className={classes.bookCard}
@@ -78,24 +83,29 @@ const ResultsCard = ({ list }) => {
                 <Grid item xs={12} sm={8}>
                   <Grid item xs={12} sm={12}>
                     <p>{item.description}</p>
+                    <hr className={classes.underLine}></hr>
                   </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <Button
-                      onClick={() => window.open(`${item.link}`, "_blank")}
-                    >
-                      View
-                    </Button>
-                    <Button link={item.link}>Add to Wishlist</Button>
+                  <Grid container spacing={3}>
+                    <Grid item xs={6} sm={4}>
+                      <Button
+                        onClick={() => window.open(`${item.link}`, "_blank")}
+                      >
+                        View
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6} sm={4}>
+                      <SaveButton {...item} _id={index} />
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} sm={3}></Grid>
+                  <hr className={classes.underLine}></hr>
                 </Grid>
               </Grid>
               <br></br>
-            </>
+            </Container>
           );
         })
       ) : (
-        <div>search or save yo</div>
+        <div>Loading activity</div>
       )}
     </Container>
   );
