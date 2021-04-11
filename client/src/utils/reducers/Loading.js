@@ -1,12 +1,11 @@
-const Loading = (state = false, action) => {
+const Loading = (loading = false, action) => {
   switch (action.type) {
     case "LOADING":
       return {
-        ...state,
-        loading: true,
+        loading: !loading,
       };
     default:
-      return state;
+      return loading;
   }
 };
 

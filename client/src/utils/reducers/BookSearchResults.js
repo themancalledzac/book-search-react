@@ -1,13 +1,11 @@
-const BookSearchResults = (state = "", action) => {
+const BookSearchResults = (books = [], action) => {
   switch (action.type) {
     case "BOOK_SEARCH":
       return {
-        ...state,
         books: [...action.books],
-        loading: false,
       };
     default:
-      return state;
+      return books;
   }
 };
 
