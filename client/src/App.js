@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Nav from "./components/Nav.js";
 import Search from "./pages/Search.js";
 import Cart from "./pages/Cart.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -9,7 +8,6 @@ class App extends Component {
     return (
       <div className='App'>
         <Router>
-          <Nav />
           <Switch>
             <Route exact path='/' component={Search} />
             <Route exact path='/cart' component={Cart} />

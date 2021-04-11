@@ -1,0 +1,12 @@
+{
+    
+    "searchPage": {
+        "title": "Cart",
+        "link": "/cart"
+    },
+    "cart": {
+        "title": "Search",
+        "link": "/"
+    }
+}
+

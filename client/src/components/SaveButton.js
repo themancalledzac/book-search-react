@@ -19,8 +19,10 @@ const SaveButton = ({ _id }) => {
       const dataId = event.currentTarget.getAttribute("data-id");
       console.log(event.target);
       console.log(dataId);
+      console.log(BookSearchResults.books);
+      console.log(BookSearchResults.books[dataId]);
 
-      await API.saveBook(BookSearchResults[dataId]);
+      await API.saveBook(BookSearchResults.books[dataId]);
       dispatch({
         type: "LOADING",
       });

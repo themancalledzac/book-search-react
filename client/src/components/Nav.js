@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -14,6 +14,7 @@ import ListIcon from "@material-ui/icons/List";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import API from "../utils/API";
 import colors from "./color";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,11 +94,17 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  linkStyle: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 }));
 
-export default function ProminentAppBar() {
+export default function ProminentAppBar(props) {
   const classes = useStyles();
   const searchRef = useRef();
+  const currentPage = useSelector((page) => page.CurrentPage);
+  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -108,6 +115,12 @@ export default function ProminentAppBar() {
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handlePageChange = () => {
+    dispatch({
+      type: "PAGE_CHANGE",
+    });
   };
 
   const handleMobileMenuClose = () => {
@@ -212,6 +225,9 @@ export default function ProminentAppBar() {
   function refreshPage() {
     window.location.reload(false);
   }
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   const renderMobileMenu = (
     <Menu
@@ -224,12 +240,20 @@ export default function ProminentAppBar() {
       onClose={handleMobileMenuClose}
       style={{ paddingRight: "20px" }}
     >
-      <MenuItem>
-        <IconButton color='inherit' className={classes.menuItem}>
-          <ListIcon />
-        </IconButton>
-        <p>Wishlist</p>
-      </MenuItem>
+      <Link
+        to={props.link}
+        className={classes.linkStyle}
+        onClick={() => {
+          handleMobileMenuClose();
+        }}
+      >
+        <MenuItem>
+          <IconButton color='inherit' className={classes.menuItem}>
+            <ListIcon />
+          </IconButton>
+          <p>{props.title}</p>
+        </MenuItem>
+      </Link>
 
       <MenuItem onClick={handleProfileMenuOpen} className={classes.menuItem}>
         <IconButton
@@ -281,12 +305,14 @@ export default function ProminentAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton
-              aria-label='module to contact / email me'
-              color='inherit'
-            >
-              <ListIcon />
-            </IconButton>
+            <Link to={props.link} className={classes.linkStyle}>
+              <IconButton
+                aria-label='module to contact / email me'
+                color='inherit'
+              >
+                <ListIcon />
+              </IconButton>
+            </Link>
             <IconButton
               aria-label='link to portfolio'
               color='inherit'

@@ -5,8 +5,6 @@ import BookSearchInput from "./BookSearchInput.js";
 import Loading from "./Loading.js";
 import SavedBookList from "./SavedBookList.js";
 
-// import changeWidth from "./changeWidth";
-
 const allReducer = combineReducers({
   // name our reducers here
   BookSearchResults,

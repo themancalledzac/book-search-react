@@ -5,6 +5,8 @@ import BookSearch from "../components/BookSearch.js";
 import ResultsCard from "../components/ResultsCard.js";
 import { useSelector } from "react-redux";
 import AboutCard from "../components/AboutCard.js";
+import Nav from "../components/Nav";
+import navData from "../utils/navData.json";
 
 // const useStyles = makeStyles((theme) => ({
 //   searchBar: {
@@ -16,12 +18,12 @@ import AboutCard from "../components/AboutCard.js";
 
 const Search = () => {
   // const classes = useStyles();
-
   const bookSearch = useSelector((state) => state.BookSearchResults);
 
   return (
     <>
       <Container>
+        <Nav title={navData.searchPage.title} link={navData.searchPage.link} />
         <AboutCard />
         <ResultsCard list={bookSearch.books} />
       </Container>
