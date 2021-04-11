@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     display: "none",
+    textAlign: "center",
     [theme.breakpoints.down("xs")]: {
       display: "block",
     },

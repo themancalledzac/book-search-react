@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
+    borderRadius: "7px",
   },
   image: {
     flex: "1 1 0",
@@ -38,6 +39,19 @@ const useStyles = makeStyles((theme) => ({
   underLine: {
     borderTop: "1px #000000",
   },
+  firstUnderline: {
+    borderTop: "1px #000000",
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "85%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "90%",
+    },
+  },
+  title: {
+    textAlign: "center",
+    marginBottom: "40px",
+  },
 }));
 
 const ResultsCard = ({ list }) => {
@@ -57,6 +71,7 @@ const ResultsCard = ({ list }) => {
         {BookSearchInput ? `Search Result:` : `New York Times Bestsellers`}{" "}
         {BookSearchInput}
       </Typography>
+      <hr className={classes.firstUnderline}></hr>
       {list ? (
         list.map((item, index) => {
           return (
