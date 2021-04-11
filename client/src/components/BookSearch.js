@@ -36,6 +36,9 @@ const BookSearch = () => {
         type: "BOOK_SEARCH",
         books: await data.items.map((item) => bookData(item)),
       });
+      dispatch({
+        type: "LOADING",
+      });
     }
     initialBooks();
   }, []);
@@ -73,6 +76,9 @@ const BookSearch = () => {
     dispatch({
       type: "BOOK_SEARCH",
       books: await data.items.map((item) => bookData(item)),
+    });
+    dispatch({
+      type: "LOADING",
     });
     console.log(data);
   };

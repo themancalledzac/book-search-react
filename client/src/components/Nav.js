@@ -160,6 +160,9 @@ export default function ProminentAppBar() {
         type: "BOOK_SEARCH",
         books: await data.items.map((item) => bookData(item)),
       });
+      dispatch({
+        type: "LOADING",
+      });
     }
     initialBooks();
   }, []);
@@ -174,7 +177,6 @@ export default function ProminentAppBar() {
       subtitle: item.volumeInfo.subtitle,
       description: item.volumeInfo.description,
       link: item.volumeInfo.infoLink,
-      index: item.id,
     };
   };
   // const handleInputChange = async (e) => {
@@ -206,6 +208,9 @@ export default function ProminentAppBar() {
     dispatch({
       type: "BOOK_SEARCH_INPUT",
       input: searchRef.current.value,
+    });
+    dispatch({
+      type: "LOADING",
     });
     document.getElementById("bookSearchId").value = "";
     console.log(data);
