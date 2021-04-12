@@ -17,23 +17,23 @@ const SaveButton = ({ _id }) => {
     try {
       // currentTarget vs target for the material-ui element to work
       const dataId = event.currentTarget.getAttribute("data-id");
-      console.log(event.target);
-      console.log(dataId);
-      console.log(BookSearchResults.books);
-      console.log(BookSearchResults.books[dataId]);
+      const bookToSave = BookSearchResults.books[dataId];
+      // console.log(event.target);
+      // console.log(dataId);
+      // console.log(BookSearchResults.books);
+      // console.log(bookToSave);
 
-      await API.saveBook(BookSearchResults.books[dataId]);
-      dispatch({
-        type: "LOADING",
-      });
+      // dispatch({
+      //   type: "LOADING",
+      // });
+      await API.saveBook(bookToSave);
       await dispatch({
         type: "BOOK_ADD",
-        savedBooks: BookSearchResults[dataId],
+        savedBooks: bookToSave,
       });
       dispatch({
         type: "LOADING",
       });
-      return;
     } catch (err) {
       console.log(err);
     }

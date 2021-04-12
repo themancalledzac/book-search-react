@@ -7,12 +7,13 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/booksearch");
 
 const bookSeed = [
   {
-    title: "Algorithms",
     authors: ["Grokking"],
     description:
       "An illustrated guide for programmers and other curious people",
     image: "",
     link: "",
+    subtitle: "",
+    title: "Algorithms",
   },
 ];
 

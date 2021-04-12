@@ -12,12 +12,14 @@ module.exports = {
   },
   create: async (req, res) => {
     try {
+      console.log(req.body);
       const bookCreate = await Books.create(req.body);
       res.status(200).json(bookCreate);
     } catch (err) {
       res.status(422).json(err);
     }
   },
+
   remove: async (req, res) => {
     try {
       const bookDelete = await Books.findByIdAndRemove(req.paramms.id);
