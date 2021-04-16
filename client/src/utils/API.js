@@ -8,7 +8,9 @@ require("dotenv").config();
 
 const API = {
   saveBook: async (bookToSave) => {
-    return axios.post("http://localhost:3001/api/books", bookToSave);
+    axios.post("/api/books", bookToSave).then((response) => {
+      console.log(response);
+    });
   },
   searchBooks: async (search) => {
     return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}`);

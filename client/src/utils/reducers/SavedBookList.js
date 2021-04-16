@@ -11,7 +11,7 @@ const SavedBookList = (savedBooks = {}, action) => {
   switch (action.type) {
     case "BOOK_ADD":
       return {
-        savedBooks: [...action.savedBooks],
+        savedBooks: { ...action.savedBooks },
       };
     default:
       return savedBooks;
