@@ -1,4 +1,4 @@
-const { Books } = require("../models");
+const db = require("../models");
 
 // defining methods for the booksController
 module.exports = {
@@ -10,15 +10,21 @@ module.exports = {
       res.status(422).json(err);
     }
   },
-  create: async (req, res) => {
-    try {
-      console.log(req.body);
-      const bookCreate = await Books.create(req.body);
-      res.status(200).json(bookCreate);
-    } catch (err) {
-      res.status(422).json(err);
-    }
+  create: function (req, res) {
+    db.Books.create(req.body)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
   },
+  // create: async (req, res) => {
+  //   try {
+  //     console.log(req.body);
+  //     const bookCreate = await Books.create(req.body);
+  //     res.status(200).json(bookCreate);
+  //     console.log("book saved");
+  //   } catch (err) {
+  //     res.status(422).json(err);
+  //   }
+  // },
 
   remove: async (req, res) => {
     try {

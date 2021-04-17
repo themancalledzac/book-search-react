@@ -1,16 +1,16 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
 require("dotenv").config();
-// const API_KEY = process.env.NEW_YORK_TIMES_KEY;
-
-// https://www.googleapis.com/apiName/apiVersion/resourcePath?parameters
-// https://codeburst.io/learn-understand-javascripts-reduce-function-b2b0406efbdc
-// return axios.post("/api/books", book);
-
-const API = {
+export default {
+  // saveBook: async (books) => {
+  //   axios.post("/api/books", books).then((response) => {
+  //     console.log(books);
+  //     console.log("book saved?");
+  //     console.log(response);
+  //   });
+  // },
   saveBook: async (bookToSave) => {
-    axios.post("/api/books", bookToSave).then((response) => {
-      console.log(response);
-    });
+    return axios.post("/api/books", bookToSave);
   },
   searchBooks: async (search) => {
     return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}`);
@@ -31,5 +31,3 @@ const API = {
   //   );
   // },
 };
-
-export default API;

@@ -29,7 +29,7 @@ const SaveButton = ({ _id }) => {
       await API.saveBook(bookToSave);
       await dispatch({
         type: "BOOK_ADD",
-        savedBooks: bookToSave,
+        payload: bookToSave,
       });
       dispatch({
         type: "LOADING",

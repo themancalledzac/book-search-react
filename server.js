@@ -22,10 +22,13 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/booksearch", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost:27017/booksearch",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 app.listen(PORT, function () {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
