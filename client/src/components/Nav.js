@@ -274,14 +274,16 @@ export default function ProminentAppBar(props) {
     <div className={classes.grow}>
       <AppBar style={{ backgroundColor: colors.blue }} position='static'>
         <Toolbar>
-          <Typography
-            className={classes.title}
-            variant='h6'
-            noWrap
-            onClick={refreshPage}
-          >
-            Google Book Search
-          </Typography>
+          <Link to='/' className={classes.linkStyle}>
+            <Typography
+              className={classes.title}
+              variant='h6'
+              noWrap
+              // if onClick={refreshPage}
+            >
+              Google Book Search
+            </Typography>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />

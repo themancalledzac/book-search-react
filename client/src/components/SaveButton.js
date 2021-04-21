@@ -23,17 +23,8 @@ const SaveButton = ({ _id }) => {
       // console.log(BookSearchResults.books);
       console.log(bookToSave);
 
-      dispatch({
-        type: "LOADING",
-      });
       await API.saveBook(bookToSave);
-      await dispatch({
-        type: "BOOK_ADD",
-        payload: bookToSave,
-      });
-      dispatch({
-        type: "LOADING",
-      });
+
       return;
     } catch (err) {
       console.log(err);

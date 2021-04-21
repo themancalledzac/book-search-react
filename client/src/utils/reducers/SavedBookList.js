@@ -1,16 +1,11 @@
-var initialState = {
-  array: [],
-};
-
-const SavedBookList = (state = initialState, action) => {
+const SavedBookList = (books = [], action) => {
   switch (action.type) {
     case "BOOK_ADD":
       return {
-        ...state,
-        array: [...state.array, action.payload],
+        books: [...action.books],
       };
     default:
-      return state;
+      return books;
   }
 };
 

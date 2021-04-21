@@ -23,7 +23,11 @@ const Search = () => {
   return (
     <>
       <Container>
-        <Nav title={navData.searchPage.title} link={navData.searchPage.link} />
+        <Nav
+          title={navData.searchPage.title}
+          homePage={navData.searchPage.link}
+          link={navData.searchPage.link}
+        />
         <AboutCard />
         <ResultsCard list={bookSearch.books} />
       </Container>
