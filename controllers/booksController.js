@@ -14,19 +14,28 @@ module.exports = {
     //   res.status(422).json(err);
     // }
   },
-  create: function (req, res) {
+  create: async (req, res) => {
     db.Books.create(req.body)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  findById: async (req, res) => {
+    db.Books.findById({ _id: req.params.id })
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
 
   remove: async (req, res) => {
-    try {
-      const bookDelete = await Books.findByIdAndRemove(req.paramms.id);
-      res.status(200).json(bookDelete);
-    } catch (err) {
-      res.status(422).json(err);
-    }
+    db.Books.findById({ _id: req.params.id })
+      .then((dbModel) => dbModel.remove())
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+    // try {
+    //   const bookDelete = await Books.findByIdAndRemove(req.paramms.id);
+    //   res.status(200).json(bookDelete);
+    // } catch (err) {
+    //   res.status(422).json(err);
+    // }
   },
 };
 

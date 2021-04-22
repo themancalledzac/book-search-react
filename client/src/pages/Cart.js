@@ -41,7 +41,7 @@ const Cart = () => {
           link={navData.cart.link}
         />
         <AboutCard />
-        <ResultsCard button={DeleteButton} list={bookSearch.books} />
+        <ResultsCard button={"delete"} list={bookSearch.books} />
       </Container>
     </>
   );

@@ -7,7 +7,11 @@ const useStyles = makeStyles((theme) => ({
   button: {},
 }));
 
-const SaveButton = ({ _id }) => {
+function refreshPage() {
+  window.location.reload(false);
+}
+
+const SaveButton = ({ _id, button }) => {
   const classes = useStyles();
   const BookSearchResults = useSelector((state) => state.BookSearchResults);
   const dispatch = useDispatch();
@@ -24,7 +28,18 @@ const SaveButton = ({ _id }) => {
       console.log(bookToSave);
 
       await API.saveBook(bookToSave);
-
+      return;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    try {
+      const dataId = event.currentTarget.getAttribute("data-id");
+      // console.log(BookSearchResults.books);
+      console.log(dataId);
+      await API.deleteBook(dataId);
       return;
     } catch (err) {
       console.log(err);
@@ -33,13 +48,19 @@ const SaveButton = ({ _id }) => {
 
   return (
     <>
-      <Button
-        className={classes.button}
-        data-id={_id}
-        onClick={handleAddSubmit}
-      >
-        Add to Cart
-      </Button>
+      {button === "save" ? (
+        <Button
+          className={classes.button}
+          data-id={_id}
+          onClick={handleAddSubmit}
+        >
+          Add to Cart
+        </Button>
+      ) : (
+        <Button className={classes.button} data-id={_id} onClick={handleDelete}>
+          Remove from Cart
+        </Button>
+      )}
     </>
   );
 };

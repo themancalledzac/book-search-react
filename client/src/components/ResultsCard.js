@@ -12,11 +12,17 @@ import API from "../utils/API";
 import SaveButton from "./SaveButton";
 
 const useStyles = makeStyles((theme) => ({
-  searchBar: {
+  component: {
     marginTop: theme.spacing(5),
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
     borderRadius: "7px",
+  },
+  savePage: {
+    backgroundColor: colors.blueLight,
+  },
+  cartPage: {
+    backgroundColor: colors.blue,
   },
   image: {
     flex: "1 1 0",
@@ -54,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ResultsCard = ({ list }) => {
+const ResultsCard = ({ list, button }) => {
   const classes = useStyles();
   const BookSearchInput = useSelector(
     (searchInput) => searchInput.BookSearchInput
@@ -63,9 +69,9 @@ const ResultsCard = ({ list }) => {
 
   return (
     <Container
-      className={classes.searchBar}
+      className={`${classes.component}
+        ${button === "save" ? classes.savePage : classes.cartPage}`}
       maxWidth='md'
-      style={{ backgroundColor: colors.blueLight }}
     >
       <Typography className={classes.title} variant='h6' noWrap>
         {BookSearchInput ? `Search Result:` : `New York Times Bestsellers`}{" "}
@@ -109,7 +115,11 @@ const ResultsCard = ({ list }) => {
                       </Button>
                     </Grid>
                     <Grid item xs={6} sm={4}>
-                      <SaveButton {...item} _id={index} />
+                      <SaveButton
+                        {...item}
+                        _id={item._id ? item._id : index}
+                        button={button}
+                      />
                     </Grid>
                   </Grid>
                   <hr className={classes.underLine}></hr>

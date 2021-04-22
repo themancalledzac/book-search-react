@@ -1,12 +1,12 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 // import { makeStyles } from "@material-ui/core";
-import BookSearch from "../components/BookSearch.js";
 import ResultsCard from "../components/ResultsCard.js";
 import { useSelector } from "react-redux";
 import AboutCard from "../components/AboutCard.js";
 import Nav from "../components/Nav";
 import navData from "../utils/navData.json";
+import SaveButton from "../components/SaveButton.js";
 
 // const useStyles = makeStyles((theme) => ({
 //   searchBar: {
@@ -29,7 +29,7 @@ const Search = () => {
           link={navData.searchPage.link}
         />
         <AboutCard />
-        <ResultsCard list={bookSearch.books} />
+        <ResultsCard button={"save"} list={bookSearch.books} />
       </Container>
     </>
   );
