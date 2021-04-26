@@ -53,6 +53,8 @@ Navigation and dynamic rendering
 
 ```
 
+![project gif](./images/bookSearch.gif)
+
 ## Installation
 
 ## Questions
