@@ -74,7 +74,6 @@ const ResultsCard = ({ list, button }) => {
       maxWidth='md'
     >
       <Typography className={classes.title} variant='h6' noWrap>
-        {BookSearchInput ? `Search Result:` : `New York Times Bestsellers`}{" "}
         {BookSearchInput}
       </Typography>
       <hr className={classes.firstUnderline}></hr>

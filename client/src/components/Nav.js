@@ -167,6 +167,10 @@ export default function ProminentAppBar(props) {
         books: await data.items.map((item) => bookData(item)),
       });
       dispatch({
+        type: "BOOK_SEARCH_INPUT",
+        input: "The New York Times Bestsellers",
+      });
+      dispatch({
         type: "LOADING",
       });
     }
@@ -279,7 +283,7 @@ export default function ProminentAppBar(props) {
               className={classes.title}
               variant='h6'
               noWrap
-              // if onClick={refreshPage}
+              onClick={refreshPage}
             >
               Google Book Search
             </Typography>
