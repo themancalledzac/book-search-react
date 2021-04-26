@@ -4,7 +4,7 @@ import colors from "./color";
 
 const useStyles = makeStyles((theme) => ({
   aboutCard: {
-    backgroundColor: colors.blueLight,
+    backgroundColor: colors.whiteBlue,
     borderRadius: "7px",
     padding: "20px",
     marginTop: "20px",
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   ogTitle: {
-    textAlign: "center",
+    // textAlign: "center",
     [theme.breakpoints.down("xs")]: {
       display: "none",
     },
@@ -44,8 +44,8 @@ const AboutCard = ({ title, paragraph }) => {
       >
         Google Book Search
       </Typography>
-      <Typography>
-        <h4 className={classes.ogTitle}>{title}</h4>
+      <Typography className={classes.ogTitle} variant='h6' noWrap>
+        {title}
       </Typography>
       <p>{paragraph}</p>
     </Container>

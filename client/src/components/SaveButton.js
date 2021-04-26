@@ -1,4 +1,4 @@
-import { Button, makeStyles } from "@material-ui/core";
+import { Button, makeStyles, Tooltip } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../utils/API";
@@ -29,6 +29,7 @@ const SaveButton = ({ _id, button }) => {
       console.log(bookToSave);
 
       await API.saveBook(bookToSave);
+      handleTooltipOpen();
       return;
     } catch (err) {
       console.log(err);
@@ -46,17 +47,43 @@ const SaveButton = ({ _id, button }) => {
       console.log(err);
     }
   };
+  const [open, setOpen] = React.useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+    setTimeout(function () {
+      handleTooltipClose();
+    }, 1000);
+  };
 
   return (
     <>
       {button === "save" ? (
-        <Button
-          className={classes.button}
-          data-id={_id}
-          onClick={handleAddSubmit}
+        <Tooltip
+          title='Book Saved'
+          leaveDelay={1000}
+          PopperProps={{
+            disablePortal: true,
+          }}
+          placement='right'
+          onClose={handleTooltipClose}
+          open={open}
+          disableFocusListener
+          disableHoverListener
+          disableTouchListener
         >
-          Add to Cart
-        </Button>
+          <Button
+            className={classes.button}
+            data-id={_id}
+            onClick={handleAddSubmit}
+          >
+            Add to Cart
+          </Button>
+        </Tooltip>
       ) : (
         <Button className={classes.button} data-id={_id} onClick={handleDelete}>
           Remove from Cart
