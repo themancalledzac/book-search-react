@@ -2,14 +2,15 @@ import { Button, makeStyles } from "@material-ui/core";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../utils/API";
+import refreshPage from "./reloadPage";
 
 const useStyles = makeStyles((theme) => ({
   button: {},
 }));
 
-function refreshPage() {
-  window.location.reload(false);
-}
+// function refreshPage() {
+//   window.location.reload(false);
+// }
 
 const SaveButton = ({ _id, button }) => {
   const classes = useStyles();
@@ -40,7 +41,7 @@ const SaveButton = ({ _id, button }) => {
       // console.log(BookSearchResults.books);
       console.log(dataId);
       await API.deleteBook(dataId);
-      return;
+      refreshPage();
     } catch (err) {
       console.log(err);
     }
