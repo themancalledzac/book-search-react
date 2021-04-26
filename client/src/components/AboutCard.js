@@ -19,13 +19,19 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  ogTitle: {
+    textAlign: "center",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
 }));
 
 function refreshPage() {
   window.location.reload(false);
 }
 
-const AboutCard = () => {
+const AboutCard = ({ title, paragraph }) => {
   const classes = useStyles();
   const searchRef = useRef();
   return (
@@ -38,11 +44,10 @@ const AboutCard = () => {
       >
         Google Book Search
       </Typography>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda iste
-        incidunt earum tempora quia neque veniam, dolores dolore repellendus
-        ratione!
-      </p>
+      <Typography>
+        <h4 className={classes.ogTitle}>{title}</h4>
+      </Typography>
+      <p>{paragraph}</p>
     </Container>
   );
 };

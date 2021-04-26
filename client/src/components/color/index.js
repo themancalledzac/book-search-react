@@ -10,6 +10,7 @@ const colors = {
   primary: `#f5cb5c`,
   dark: `#242423`,
   darkGrey: `#333533`,
+  whiteBlue: `#edf3f5`,
 };
 
 export default colors;

@@ -15,6 +15,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import API from "../utils/API";
 import colors from "./color";
 import { Link } from "react-router-dom";
+import bookData from "./bookData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -177,27 +178,6 @@ export default function ProminentAppBar(props) {
     initialBooks();
   }, []);
 
-  const bookData = (item) => {
-    return {
-      authors: item.volumeInfo.authors,
-      image: item.volumeInfo.imageLinks
-        ? item.volumeInfo.imageLinks.thumbnail
-        : "./images/book.png",
-      title: item.volumeInfo.title,
-      subtitle: item.volumeInfo.subtitle,
-      description: item.volumeInfo.description,
-      link: item.volumeInfo.infoLink,
-    };
-  };
-  // const handleInputChange = async (e) => {
-  //   e.preventDefault();
-  //   dispatch({
-  //     type: "BOOK_SEARCH_INPUT",
-  //     input: searchRef.current.value,
-  //   });
-  //   console.log(BookSearchInput);
-  // };
-
   const keyPress = (e) => {
     if (e.keyCode === 13) {
       handleSubmit();
@@ -316,7 +296,7 @@ export default function ProminentAppBar(props) {
                 aria-label='module to contact / email me'
                 color='inherit'
               >
-                <ListIcon />
+                {props.title}
               </IconButton>
             </Link>
             <IconButton

@@ -7,7 +7,7 @@ import navData from "../utils/navData.json";
 import API from "../utils/API";
 import ResultsCard from "../components/ResultsCard";
 import { useDispatch, useSelector } from "react-redux";
-import DeleteButton from "../components/DeleteButton";
+import headerData from "../utils/headerAboutData";
 
 const Cart = () => {
   const [data, setData] = React.useState();
@@ -40,8 +40,15 @@ const Cart = () => {
           homePage={navData.cart.link}
           link={navData.cart.link}
         />
-        <AboutCard />
-        <ResultsCard button={"delete"} list={bookSearch.books} />
+        <AboutCard
+          title={headerData[1].title}
+          paragraph={headerData[1].paragraph}
+        />
+        <ResultsCard
+          button={"delete"}
+          list={bookSearch.books}
+          title='Your Saved Books'
+        />
       </Container>
     </>
   );

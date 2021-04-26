@@ -6,19 +6,14 @@ import { useSelector } from "react-redux";
 import AboutCard from "../components/AboutCard.js";
 import Nav from "../components/Nav";
 import navData from "../utils/navData.json";
-import SaveButton from "../components/SaveButton.js";
-
-// const useStyles = makeStyles((theme) => ({
-//   searchBar: {
-//     marginTop: theme.spacing(15),
-//     paddingTop: theme.spacing(5),
-//     paddingBottom: theme.spacing(5),
-//   },
-// }));
+import headerData from "../utils/headerAboutData";
 
 const Search = () => {
   // const classes = useStyles();
   const bookSearch = useSelector((state) => state.BookSearchResults);
+  const BookSearchInput = useSelector(
+    (searchInput) => searchInput.BookSearchInput
+  );
 
   return (
     <>
@@ -28,8 +23,15 @@ const Search = () => {
           homePage={navData.searchPage.link}
           link={navData.searchPage.link}
         />
-        <AboutCard />
-        <ResultsCard button={"save"} list={bookSearch.books} />
+        <AboutCard
+          title={headerData[0].title}
+          paragraph={headerData[0].paragraph}
+        />
+        <ResultsCard
+          button={"save"}
+          list={bookSearch.books}
+          title={BookSearchInput}
+        />
       </Container>
     </>
   );

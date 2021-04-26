@@ -3,6 +3,7 @@ import {
   Container,
   Grid,
   makeStyles,
+  Paper,
   Typography,
 } from "@material-ui/core";
 import React from "react";
@@ -19,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "7px",
   },
   savePage: {
-    backgroundColor: colors.blueLight,
+    backgroundColor: colors.whiteBlue,
   },
   cartPage: {
-    backgroundColor: colors.blue,
+    backgroundColor: colors.whiteBlue,
   },
   image: {
     flex: "1 1 0",
@@ -39,8 +40,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   bookCard: {
-    marginBottom: "25px",
+    marginBottom: "5px",
     borderRadius: "7px",
+    paddingLeft: "30px",
+    paddingRight: "30px",
   },
   underLine: {
     borderTop: "1px #000000",
@@ -58,9 +61,17 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginBottom: "40px",
   },
+  bookDivide: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
+  paper: {
+    marginBottom: "25px",
+  },
 }));
 
-const ResultsCard = ({ list, button }) => {
+const ResultsCard = ({ list, button, title }) => {
   const classes = useStyles();
   const BookSearchInput = useSelector(
     (searchInput) => searchInput.BookSearchInput
@@ -74,13 +85,13 @@ const ResultsCard = ({ list, button }) => {
       maxWidth='md'
     >
       <Typography className={classes.title} variant='h6' noWrap>
-        {BookSearchInput}
+        {title}
       </Typography>
       <hr className={classes.firstUnderline}></hr>
       {list ? (
         list.map((item, index) => {
           return (
-            <Container key={index}>
+            <Paper className={classes.paper} elevation={3} key={index}>
               <Grid
                 key={index}
                 className={classes.bookCard}
@@ -125,7 +136,7 @@ const ResultsCard = ({ list, button }) => {
                 </Grid>
               </Grid>
               <br></br>
-            </Container>
+            </Paper>
           );
         })
       ) : (
